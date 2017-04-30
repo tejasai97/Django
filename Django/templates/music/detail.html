@@ -1,0 +1,19 @@
+{% extends 'music/base.html' %}
+{% block title %}Album Details{% endblock %}
+
+{% block body %}
+    <img src="{{ album.album_logo.url }}" style="width: 250px;">
+    <h1>{{ album.album_title }}</h1>
+    <h2>{{ album.artist }}</h2>
+    <h3>{{album.genre}}</h3>
+
+        {% for song in album.song_set.all %}
+            <input type="checkbox" style="opacity:0;" id="song{{ forloop.counter }}" name="song" value="{{ song.id }}">
+            <label for="song{{ forloop.counter }}">
+            {{ song.song_title }}
+            {% if song.is_favorite %}
+                <img src="http://i.imgur.com/b9b13Rd.png" />
+            {% endif %}
+            </label><br>
+        {% endfor %}
+{% endblock %}
